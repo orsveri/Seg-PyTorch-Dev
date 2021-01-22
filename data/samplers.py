@@ -1,11 +1,12 @@
 """
 https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
+Custom samplers if data batch should be formed in a special way.
 """
 
 import torch
 
 
-class SimpleCustomBatch:
+class ExampleCustomBatch:
     def __init__(self, data):
         transposed_data = list(zip(*data))
         self.inp = torch.stack(transposed_data[0], 0)
@@ -18,7 +19,7 @@ class SimpleCustomBatch:
         return self
 
 def collate_wrapper(batch):
-    return SimpleCustomBatch(batch)
+    return ExampleCustomBatch(batch)
 
 
 

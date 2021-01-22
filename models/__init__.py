@@ -1,6 +1,10 @@
-from .unet import UNet
+from.utils import save_checkpoint
 
-model_dict = {"unet": UNet}
+from .unet import UNet
+from torchvision.models.segmentation import deeplabv3_resnet50
+
+model_dict = {"unet": UNet,
+			  "deeplabv3_resnet50": deeplabv3_resnet50}
 
 def get_model_constructor(model_name):
 	if model_name in model_dict:

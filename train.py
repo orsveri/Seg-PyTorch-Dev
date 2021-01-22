@@ -1,4 +1,3 @@
-from __future__ import print_function
 import os
 import json
 import time
@@ -10,7 +9,8 @@ from data.datasets import Dataset_ADE20K
 from torch.utils.tensorboard import SummaryWriter
 from torchvision.models.segmentation import deeplabv3_resnet50
 
-from models.utils import save_checkpoint
+from models import save_checkpoint, get_model_constructor
+
 
 
 # -------------------------------------------------------------------------------------------------------------------- #
@@ -26,15 +26,17 @@ input_shape = (256, 512) # can have the length of 2 (H, W) or 3 (H, W, C)
 resize_pad = True # if True, aspect ratio will be kept by using padding
 do_aug = False
 
-logdir = "/media/sveta/DATASTORE/AI_ML_DL/Projects/Segmentation/Seg-Pytorch-Dev_data/logs/try01"
+model_name = "deeplabv3_resnet50"
+logdir = "/media/sveta/DATASTORE/AI_ML_DL/Projects/Segmentation/Seg-Pytorch-Dev_data/logs/try02"
 batch_size = 3
 epochs = 3
-ckpt_every_steps = 10 # can be None
-test_every_steps = 20 # can be None
-with_gpu = True
+ckpt_every_steps = 10 	# can be None
+test_every_steps = 20 	# can be None
+restrict_gpu = False	# GPU won't be used if restrict_gpu = True
 
 # Notes for the config file. It may contain anything that can be written to .json file.
-notes = "Test run of training framework. Database: ADE20K, default train-test split."
+notes = "Test run of training framework. Database: ADE20K, default train-test split.\n " \
+		"Fixing some small things"
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Prepare the data, directory with logs and config file
@@ -86,20 +88,26 @@ with open(os.path.join(logdir, "cfg.json"), 'w', encoding="utf-8") as f:
 	json.dump(train_config, f, indent=4)
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# Prepare the model and train parameters
+# Prepare the model and training parameters
 # -------------------------------------------------------------------------------------------------------------------- #
 
-model = deeplabv3_resnet50(pretrained=False, progress=True, num_classes=nb_classes, aux_loss=None)
-model = model.cuda()
+#model = deeplabv3_resnet50(pretrained=False, progress=True, num_classes=nb_classes, aux_loss=None)
+model_builder = get_model_constructor(model_name)
+model = model_builder(pretrained=False, progress=True, num_classes=nb_classes, aux_loss=None)
 
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=0., betas=(0.9, 0.999))
-criterion = nn.BCEWithLogitsLoss().cuda()
+criterion = nn.BCEWithLogitsLoss()
 writer = SummaryWriter(log_dir=logdir)
+
+have_gpu = torch.cuda.is_available()
+if have_gpu and not restrict_gpu:
+	model = model.cuda()
+	criterion = criterion.cuda()
 
 sum_loss = 0.0
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# Train loop
+# Train-val loop
 # -------------------------------------------------------------------------------------------------------------------- #
 
 L_steps = epochs * L_train
@@ -112,7 +120,7 @@ for epoch in range(1, epochs+1):  # loop over the dataset multiple times
 	g_step = 0
 
 	for step_train, batch_train in enumerate(loader_train, start=1):
-
+		# DEBUG
 		if step_train > 20:
 			break
 
@@ -121,9 +129,9 @@ for epoch in range(1, epochs+1):  # loop over the dataset multiple times
 
 		# get the inputs; data is a list of [inputs, labels]
 		imgs, lblmps = batch_train
-		# TODO: is it a nice way to use cuda? Flag or something maybe?
-		imgs = imgs.cuda()
-		lblmps = lblmps.cuda()
+		if have_gpu and not restrict_gpu:
+			imgs = imgs.cuda()
+			lblmps = lblmps.cuda()
 
 		optimizer.zero_grad()
 		outputs = model(imgs)['out']

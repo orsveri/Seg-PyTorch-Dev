@@ -9,7 +9,7 @@ Based on:
 	[github.com/petrosgk/Kaggle-Carvana-Image-Masking-Challenge],
 which was based on this PyTorch implementation:
 	[https://www.kaggle.com/c/carvana-image-masking-challenge/discussion/37208]
-TODO: now only model for input shape of 1024 implemented; add other options
+TODO: now only model for input shape of 1024 implemented; check and add other options
 """
 
 import torch
@@ -77,7 +77,6 @@ class BlockUpsampling(nn.Module):
 
 
 class UNet(nn.Module):
-	some_constants = None # TODO: remove if isn't needed
 
 	def __init__(self, nb_classes, input_shape):
 		super(UNet, self).__init__()

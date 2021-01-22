@@ -1,5 +1,7 @@
-#TODO: добавить шапку, актуализировать подготовку обучающего примера
-
+"""
+Dataset classes for different datasets (databases).
+Dataset class implements methods __len__ and __getitem__
+"""
 import os
 import cv2
 import torch

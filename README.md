@@ -13,8 +13,11 @@ Structure of the repository:
 - _train.py_\
     Simple script for training 
     
-####Notes
+#### Notes and TODOs
 - max 255 clsses\
     What to do if we have more?
+- test UNet model and add other variations (test on some simple dataset with 1-5 classes)
+- add another models from torchvision
+- download weights for torchvision models and organize their loading to models
     
 
