@@ -1,4 +1,6 @@
 """
+ADE20K Dataset, old version with scene subdirs
+
 STEP 1 in a database preprocessing:
 	making a list of all input image and annotation files and saving it as .csv file
 """

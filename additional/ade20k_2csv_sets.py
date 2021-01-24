@@ -1,11 +1,10 @@
 """
+ADE20K Dataset, http://sceneparsing.csail.mit.edu/ (scene Parsing train/val data)
+
 STEP 2 in a database preprocessing:
 	splitting a full list of image and annotation files into two lists for train and validation/test
 """
 
-import os
-import scipy.io
-import numpy as np
 import pandas as pd
 
 

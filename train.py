@@ -12,7 +12,6 @@ from torchvision.models.segmentation import deeplabv3_resnet50
 from models import save_checkpoint, get_model_constructor
 
 
-
 # -------------------------------------------------------------------------------------------------------------------- #
 # Parameters and input data
 # -------------------------------------------------------------------------------------------------------------------- #
@@ -27,6 +26,8 @@ resize_pad = True # if True, aspect ratio will be kept by using padding
 do_aug = False
 
 model_name = "deeplabv3_resnet50"
+pretrained_weights = "" # weights with the same number of classes
+pretrained_nb_classes = None # None if nb_classes is what we want
 logdir = "/media/sveta/DATASTORE/AI_ML_DL/Projects/Segmentation/Seg-Pytorch-Dev_data/logs/try02"
 batch_size = 3
 epochs = 3

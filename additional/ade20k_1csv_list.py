@@ -1,12 +1,11 @@
 """
+ADE20K Dataset, http://sceneparsing.csail.mit.edu/ (scene Parsing train/val data)
+
 STEP 1 in a database preprocessing:
 	making a list of all input image and annotation files and saving it as .csv file
 """
 
 import os
-import cv2
-import scipy.io
-import numpy as np
 import pandas as pd
 
 

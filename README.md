@@ -3,21 +3,31 @@
 This repository contains simple baseline for segmentation projects.
 
 Structure of the repository:
-- _[additional]_\
+- `[additional]`\
     Some scripts and tools to prepare certain datasets
-- _[models]_\
+- `[models]`\
     Segmentation models and functions for them (checkpoint saving, exporting, ..)\
     There will also be custom loss functions
-- _[data]_\
+- `[data]`\
     All for handling the data: pytorch datasets, samplers and functions for data processing
-- _train.py_\
+- `train.py`\
     Simple script for training 
-    
+
+
+#### Datasets
+- _ADE20K_ [http://sceneparsing.csail.mit.edu/, scene Parsing train/val data]\
+Scene-centric indoor and outdoor images.
+- _The Oxford-IIIT Pet_ [https://www.kaggle.com/devdgohil/the-oxfordiiit-pet-dataset]\
+a 37 category pet dataset with roughly 100 images for each class created by the Visual Geometry Group at Oxford.
+- [TODO] _Makeup. Pixel Perfect Lips Segmentation_ [https://www.kaggle.com/olekslu/makeup-lips-segmentation-28k-samples]\
+The data was gathered and annotated with the custom semisupervised image annotation algorithm.
+- [TODO] _Segmentation Full Body MADS Dataset_ [https://www.kaggle.com/tapakah68/segmentation-full-body-mads-dataset]\
+The MADS dataset with segmented people, 1192 images. 
+
+
+
 #### Notes and TODOs
-- max 255 clsses\
-    What to do if we have more?
-- test UNet model and add other variations (test on some simple dataset with 1-5 classes)
-- add another models from torchvision
 - download weights for torchvision models and organize their loading to models
-    
+- reorganize train script - all input data and parameters should be taken from config file
+- test UNet model and add some other variations
 

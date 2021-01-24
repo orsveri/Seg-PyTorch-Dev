@@ -1,4 +1,6 @@
 """
+ADE20K Dataset, old version with scene subdirs
+
 STEP 2 in a database preprocessing:
 	converting .png annotations (color maps) to numpy arrays (label maps) and saving them as .npy files
 	(!!! this step can take several hours)
@@ -6,6 +8,7 @@ STEP 2 in a database preprocessing:
 Color coding for ADE20K:
 https://docs.google.com/spreadsheets/d/1se8YEtb2detS7OuPE86fXGyD269pMycAWe2mtKUj2W8/edit#gid=0
 (I exported this sheet as anno_filelist.csv file and used it in this script)
+BUT THIS COLOR DOESN'T MATCH THIS VERSION OF DATASET!!
 """
 
 import os
