@@ -13,6 +13,11 @@ Structure of the repository:
 - `train.py`\
     Simple script for training 
 
+#### How to use
+    1. Download dataset (works only with ADE20K for now) and run additional/ade20k_1csv_list.py, then additional/ade20k_2csv_sets.py. Don't forget to change parameters (paths) in these scripts!
+    3. Train with train.py.
+
+There are no scripts for inference yet :( I need some time..
 
 #### Datasets
 - _ADE20K_ [http://sceneparsing.csail.mit.edu/, scene Parsing train/val data]\
@@ -28,6 +33,6 @@ The MADS dataset with segmented people, 1192 images.
 
 #### Notes and TODOs
 - download weights for torchvision models and organize their loading to models
-- reorganize train script - all input data and parameters should be taken from config file
+- reorganize train.py script - all input data and parameters should be taken from config file
 - test UNet model and add some other variations
 
