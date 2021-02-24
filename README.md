@@ -14,8 +14,8 @@ Structure of the repository:
     Simple script for training 
 
 #### How to use
-    1. Download dataset (works only with ADE20K for now) and run additional/ade20k_1csv_list.py, then additional/ade20k_2csv_sets.py. Don't forget to change parameters (paths) in these scripts!
-    3. Train with train.py.
+1. Download dataset (works only with ADE20K for now) and run additional/ade20k_1csv_list.py, then additional/ade20k_2csv_sets.py. Don't forget to change parameters (paths) in these scripts!
+2. Train with train.py.
 
 There are no scripts for inference yet :( I need some time..
 
